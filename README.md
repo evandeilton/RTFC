@@ -53,7 +53,7 @@ a perda de informação da série real.
 # Instalação
 Pode ser instalado pelo comando abaixo
 ```{R}
-devtools::install_github('evandeilton/lkd')
+devtools::install_github('evandeilton/RTFC')
 ```
 
 # A função core
