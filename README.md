@@ -120,6 +120,9 @@ com rotinas de loop do tipo sapply, ou lappy para análises diversas. Padrão é
 
 ## Exemplos
 ```{R}
+
+## Análise de regressão linear simples e múltipla automática
+
 data(mensal)
 data(diario)
 # Apenas regressões simples com saída geral
@@ -136,6 +139,11 @@ fit1 <- cmis_correlacao(diario, n_passos_frente = 1, freq = 7, nvif = 100, nfold
 #fit1[[1]]
 #fit1[[2]]    
 }
+
+# Exemplo de forecast automático simples com gráficos dos modelos mais fortes
+data(mensal)
+fit <- cmis_forecast(mensal[,c(1,3)], 50, 12, foreplot = TRUE, saida_geral = TRUE)
+
 ```
 
 # Referências
