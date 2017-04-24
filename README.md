@@ -48,6 +48,14 @@ que usa regressão polinomial na série dessazonalizada e em seguida resazonalis
 desta no perído anterior. Embora complicada, esta técnica permite capturar comportamentos sazonais e evita 
 a perda de informação da série real.
 
+# Alerta! Este pacote é experimental e não está livre de erros.
+
+# Instalação
+Pode ser instalado pelo comando abaixo
+```{R}
+devtools::install_github('evandeilton/lkd')
+```
+
 # A função core
 ```{R}
 cmis_correlacao(dados, n_passos_frente = 1, freq, nvif = 100, nfolds = 5, nmod = 10,
