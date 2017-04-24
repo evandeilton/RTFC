@@ -1,0 +1,20 @@
+## Funcoes de pacotes com dependencias
+import(forecast)
+importFrom("TTR", "WMA", "SMA")
+importFrom("lubridate", "hour", "minute", "second", "day", "month", "quarter", "year", "ymd", "week")
+importFrom("tseries", "jarque.bera.test") ## Funcoes copiadas para o pacote
+import(zoo)
+import(plyr)
+import(fBasics)
+import(glmnet)
+importFrom("timeSeries", "removeNA", "interpNA")
+importFrom("TSA", "LB.test") ## Funcoes copiadas para o pacote
+importFrom("lmtest", "bptest", "dwtest") ## Funcoes copiadas para o pacote
+import(tsDyn)
+import(relaimpo)
+import(rkt)
+importFrom("xts", "try.xts")
+##import(PerformanceAnalytics)
+import(rms)
+
+exportPattern("^[[:alpha:]]+")

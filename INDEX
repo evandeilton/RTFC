@@ -1,0 +1,80 @@
+CMISForecastData        Coletor de dados do CMIS para forecasts
+Dados diarios           Conjunto de dados
+Dados mensais           Conjunto de dados
+ForecastHorizon         Define horizontes de forecast com dados com ou
+                        sem index de data
+HWesForecast            Forecast por HoltWinters Sazonal
+HWnsForecast            Forecast por HoltWinters nao zanoal
+HWsForecast             Forecast por HoltWinters sazonal
+LjungBtest_Acuracia     Calcula as estatisticas de acuracia e bondade
+                        do forecast
+Mresid                  Diversos testes de residuos
+MultiForecast           Faz forecast com diversos metodos
+RCapaTFC                Ajuda do pacote RCapaTFC
+ajusta_modelos_iniciais
+                        Ajusta ARIMA, ETS e HoltWinters
+analise_residuos        Analise de residuos em series temporais
+analise_residuos_glm    Faz analise de residuo em objetos lm ou glm
+arimaForecast           Arima forecast wrapper
+auto.arimaForecast      auto.arima forecast wrapper
+batsForecast            BATS forecast wrapper
+cmisControl             Controle de argumentos generico CMIS
+cmisMultiforecast       Abordagem avancada para forecast por diveros
+                        metodos.
+cmis_JDBC_Connect       Conecta a base do CMIS via RJDB e coleta dados
+cmis_corr               Analise de relacao entre pares de variaveis
+cmis_correlacao         Faz analise Regressao/Correlacao
+                        automaticamente
+cmis_dynamic_reg_forecast
+                        Ajusta regressao dinamica com CrossValidation
+                        via ARIMA automaticamente
+cmis_forecast           Faz ajuste de modelos ARIMA, ETS e HoltWinters
+                        automaticamente
+cmis_tendencia_npar     Faz analise nao parametrica de tendencia
+cmis_tendencia_utilizacao
+                        Indicador de tendencia de utilizacao e
+                        crescimento
+dataframe.outlier       Trata outlier e missing em data.frame
+descritiva              Analise descritiva de dados
+elastic_net_reduction   Realiza reducao de variaveis via LASSO e Ridge
+                        usando CrossValidation
+etsForecast             Ets forecast wrapper
+exaustive_lm            Ajuste e escolha de modelos lineares simples e
+                        multiplos automaticamente
+forecastMethod          Metodos de forecast implementados
+glm_extract_list        Extrai estatistica de objetos LM ou GLM
+glm_extract_list_ci     Extrai estatistica de objetos LM ou GLM
+holtForecast            Forecast por HoltWinters
+hwForecast              Forecast por HoltWinters
+linearityTest           Testes de linearidade
+lmForecast              Linear model forecast wrapper
+lm_press_stat           Estatistica PRESS
+meanForecast            Mean forecast wrapper
+model.select            Selecao automatica de modelos lm
+my_glm_cv               Analise de Cross Validacao
+my_glm_data             Trata dados para regressoes
+my_glm_vif              Analise de VIF (Variance Infraction Factor)
+my_lm_press             Calcula estatistica PRESS
+naiveForecast           Naive forecast wrapper
+nnetarForecast          NNetar forecast wrapper
+nparTrend               Analise de tendencia por testes
+                        nao-parametricos
+ordem_diferencas        Estima a ordem de diferencas
+plot.cmisdyn            Gera grafico do ajuste de regressao dinamica
+plot.multiforecast      Plota graficos de objetos da classe
+                        'multiforecast'
+rwForecast              Random walk forecast wrapper
+sesForecast             ses forecast wrapper
+snaiveForecast          Seasonal naive forecast wrapper
+stl.Forecast            Stl forecast wrapper
+stsForecast             Structural time series forecast wrapper
+summary.cmisdyn         Summariza regressao dinamica
+summary.multiforecast   Funcao generica para objeto multiforecast
+switch.cvforecast       Escolha de modelos de forecast
+tbatsForecast           TBATS forecast wrapper
+testObject              Test if an object exists
+thetaForecast           Theta forecast wrapper
+trata.outliers.ts       Trata outliers em serie temporal
+ts.dados                Trata dados para a serie temporal
+tsSummary               Default summary function
+vif                     Calcula o VIF

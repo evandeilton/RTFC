@@ -1,0 +1,34 @@
+Package: RTFC
+Type: Package
+Title: R Trend, Forecast and Correlation/Regression
+Version: 2.6.8
+Date: 2015-08-28
+Author: Jose E Lopes
+Maintainer: Jose E Lopes <evandeilton@gmail.com>
+Description: RTFC e uma sigla para R Trend Forecast and
+    Correlation. Este pacote possui todas as funcoes necessarias para a parte
+    estatistica de um CMIS. Com elas pode-se calcular indicadores de tendencia,
+    realizar forecast com modelos ARIMA, HoltWinters e ETS e tambem analise de
+    regressao linear simples e multipla de maneira automatizada.
+License: MIT
+Depends:
+    forecast,
+    xts,
+    plyr
+Imports:
+    TTR,
+    tseries,
+    zoo,
+    fBasics,
+    glmnet,
+    timeSeries,
+    TSA,
+    lmtest,
+    tsDyn,
+    relaimpo,
+    rkt,
+    rms,
+    lubridate
+NeedsCompilation: no
+Packaged: 2015-08-28 16:55:50 UTC; G0047743
+RoxygenNote: 5.0.1
