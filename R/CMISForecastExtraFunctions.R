@@ -145,13 +145,13 @@ na.interp <- function (x, lambda = NULL) {
 }
 
 
-## Função genérica para converter dados em séries temporais
+## FunÃ§Ã£o genÃ©rica para converter dados em sÃ©ries temporais
 #1) dados com data em forma factor ou character (data.frame) data(diario)
 #2) dados em formato zoo e xts (data(MSFT))
 #3) dados em formato ts e mts (data(MSFT))
-#4) dados em forma numeric (simulações)
+#4) dados em forma numeric (simulaÃ§Ãµes)
 
-# Estratégia: 
+# EstratÃ©gia: 
 # - Isolar a data e transformar em character
 # - Isolar valores e transformar em numeric ou data.frame
 # - Juntar e retornar em formato TimeSeries (dates, minute, hour, day, week, month, year e value)
@@ -237,7 +237,7 @@ ConvertData <- function(Data, tsfrequency = "day", dateformat='%d/%m/%Y %H:%M:%S
 	return(O)
 }
 
-## Tratar dados para a série temporal com datas no formato "%d/%m/%Y %H:%M:%S"
+## Tratar dados para a sÃ©rie temporal com datas no formato "%d/%m/%Y %H:%M:%S"
 ts.dados <- function(dados_hist, n_passos_frente=20, freq=7, normalize = FALSE, ...){
 
 	names(dados_hist) <- tolower(names(dados_hist))	
@@ -247,7 +247,7 @@ ts.dados <- function(dados_hist, n_passos_frente=20, freq=7, normalize = FALSE, 
 	#	cat("Exigido dados no formato data-valor 'data.frame' ou 'xts'!\n")
 	#}
 	
-	# Converte dados para séries
+	# Converte dados para sÃ©ries
 	dados_xts <- Try_error(ConvertData(dados_hist, tsfrequency, outType = "xts"))
 	
 	if (class(dados_xts)[1] !="try-error") {	
@@ -921,11 +921,11 @@ salva.resultados_v2 <- function(obj.ajuste, id_metrica_frequencia=0, primeiro_mo
 
 cmis_tendencia_npar <-
 function(x, metodo = "stl", plot = TRUE, ...) {
-## Faz extração dq tendência utilizando decomposição em STL ou Médias Móveis e depois Calcula a direção desta tendência utilizando O Slope de Sen e O teste de Mann-Kendal que são testes não paramétricos.
+## Faz extraÃ§Ã£o dq tendÃªncia utilizando decomposiÃ§Ã£o em STL ou MÃ©dias MÃ³veis e depois Calcula a direÃ§Ã£o desta tendÃªncia utilizando O Slope de Sen e O teste de Mann-Kendal que sÃ£o testes nÃ£o paramÃ©tricos.
 
-	## Verifica se a métrica é constante
+	## Verifica se a mÃ©trica Ã© constante
 	if (identico(x) < 1) {
-		#Caso haja valores missing: Interpolação linear!
+		#Caso haja valores missing: InterpolaÃ§Ã£o linear!
 		if (any(is.na(x))) {
 			x <- interpNA(x)
 		}
@@ -938,8 +938,8 @@ function(x, metodo = "stl", plot = TRUE, ...) {
 		#lo <- lowess(time(x), x, iter = 5); try(plot(lo))
 		#try(lines(lo, lwd=3, col=3))
 		
-		## Extrai a tendência para aplicar os testes
-		## Utilizando decomposição da tendência e sazonalidade por médias móveis
+		## Extrai a tendÃªncia para aplicar os testes
+		## Utilizando decomposiÃ§Ã£o da tendÃªncia e sazonalidade por mÃ©dias mÃ³veis
 		#da <- decompose(x)$trend
 		
 		if (metodo == "stl") {
@@ -990,20 +990,20 @@ function (metrica, thx = 80, forma = "tcm", plotm = FALSE) {
 	temp <- tc_m <- out <- c()
 
 	#Trata tamanho dos dados
-	if (length(metrica) < 6) {stop(paste("Pelo menos 6 observações são necessárias! \n"))}
+	if (length(metrica) < 6) {stop(paste("Pelo menos 6 observacoes sao necessarias! \n"))}
 
-	# Trata outliers considerando sazonalidade e tendência (pacote forecast)
+	# Trata outliers considerando sazonalidade e tendÃªncia (pacote forecast)
 	temp <- try(tsclean(metrica))
 	if (class(temp)!="try-error") metrica <- temp
 
-	# Verifica presença de NA's
+	# Verifica presenÃ§a de NA's
 	if (any(is.na(metrica))) {
-	  cat("Localizados ", sum(is.na(metrica)), " valores nulos na métrica. Feita remoçao! \n")
+	  cat("Localizados ", sum(is.na(metrica)), " valores nulos na metrica. Feita remocao! \n")
 	  metrica <- na.omit(metrica)
 	}
 	
 
-	## Indicador de Crescimento usando médias 
+	## Indicador de Crescimento usando mÃ©dias 
 	
 	X <- metrica
 	n <- length(X)
@@ -1011,25 +1011,25 @@ function (metrica, thx = 80, forma = "tcm", plotm = FALSE) {
 	pn<-X[n]
 	tc <- tu1 <- tu2 <- c()
 	
-	# tcme: Indicador taxa de crescimento médio na forma exponencial corrigida
+	# tcme: Indicador taxa de crescimento mÃ©dio na forma exponencial corrigida
 	if (forma == "tcme") {
 		tc_m <- exp(log(pn/p1)/n)-1
 		tcprod <- NA
 		tc <- NA
 	}
 
-	# Indicador taxa de crescimento médio usando a taxa de crescimento a cada dois pontos dos dados
+	# Indicador taxa de crescimento mÃ©dio usando a taxa de crescimento a cada dois pontos dos dados
 	# tc = (Xt-Xt-1)/Xt-1
 	# tcm = raiz(t-1){(1+tc1)*(1+tc2)*...*(1+tct)}-1
 	if (forma == "tcm"){
 
 		for(i in 2:(length(X))){
-		tc[i] <- ((X[i]-X[i-1])/X[i-1] + 0.000009) # Correçao de erro
+		tc[i] <- ((X[i]-X[i-1])/X[i-1] + 0.000009) # CorreÃ§ao de erro
 		tu1[i] <- ((X[i]-thx)/thx + 0.000009) 
 		}
 		avgtutil1 <- (1 - mean(abs(tu1), na.rm = TRUE))
 		#Tratar -Inf e +Inf
-		is.na(tc) <- do.call(cbind, lapply(tc, is.infinite)) #Rápida para dados grandes.
+		is.na(tc) <- do.call(cbind, lapply(tc, is.infinite)) #RÃ¡pida para dados grandes.
 		tcprod <- prod(1+tc, na.rm=TRUE)
 		tc_m   <- sign(tcprod) * (abs(tcprod)^(1/(length(tc)-1)))-1  
 	}
@@ -1050,7 +1050,7 @@ function (metrica, thx = 80, forma = "tcm", plotm = FALSE) {
 		}
 	}
 
-	# Cálculo do indicador de utilização: Tomar os 50% de pontos mais recentes da média móvel exponencial e tirar destes as taxas de utilização em relação ao treshold
+	# CÃ¡lculo do indicador de utilizaÃ§Ã£o: Tomar os 50% de pontos mais recentes da mÃ©dia mÃ³vel exponencial e tirar destes as taxas de utilizaÃ§Ã£o em relaÃ§Ã£o ao treshold
 	
 	Y <- suppressWarnings(na.omit(WMA(X, n = 5))) ## Garante maiores pesos para valores mais recentes
 	le <- length(Y)
@@ -1061,7 +1061,7 @@ function (metrica, thx = 80, forma = "tcm", plotm = FALSE) {
 	}
 	
 	for(i in ce:le){
-		tu2[i] <- ((Y[i]-thx)/thx + 0.000009) # Taxa de utilização em #relação ao theshold
+		tu2[i] <- ((Y[i]-thx)/thx + 0.000009) # Taxa de utilizaÃ§Ã£o em #relaÃ§Ã£o ao theshold
 	}
 	
 	avgtutil2 <- (1 - mean(abs(tu2), na.rm = TRUE))
@@ -1069,9 +1069,9 @@ function (metrica, thx = 80, forma = "tcm", plotm = FALSE) {
 	if(plotm) {
 		dev.new(width=18, height = 6)
 		par(mar = c(4,4,2,1), bg = colors()[350])
-		plot(X, type="h", col=3, lwd=2, ylab=names(metrica), xlab='Tempo', main = 'Métrica vs Média Móvel Ponderada (Maiores pesos obs mais recentes)');
+		plot(X, type="h", col=3, lwd=2, ylab=names(metrica), xlab='Tempo', main = 'Metrica vs Media Movel Ponderada (Maiores pesos obs mais recentes)');
 		lines(suppressWarnings(WMA(na.omit(X), n=5)), type="l", col=4, lwd=2)
-		legend('topright', legend=c('Métrica','WMA'), col=3:4,lwd=2)
+		legend('topright', legend=c('MÃ©trica','WMA'), col=3:4,lwd=2)
 		par(las = 0)
 	}
 	
