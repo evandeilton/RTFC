@@ -829,17 +829,17 @@ cmis_corr <- function(tabela_y, tabela_x=NULL, method = "pearson", digits = 4, v
 		tab_cor <- round(cor(tabela_y, tabela_x, use = "complete.obs", method=method, ...), digits)
 		dados <- cbind(tabela_y, tabela_x)
 	}
-	if (corsimples) { # Tabela de correlação simples nxn
+	if (corsimples) { # Tabela de correlaÃ§Ã£o simples nxn
 	tab_cor <- round(cor(dados, use = "complete.obs", method=method, ...), digits)
 	return(tab_cor)	
 	} else {
-	tab_cor[lower.tri(tab_cor, diag=TRUE)] <- NA 	# Prepara para dropar correlações duplicadas
-	tab_cor <- as.data.frame(as.table(tab_cor))  	# Transforma em uma tabela de três colunas
+	tab_cor[lower.tri(tab_cor, diag=TRUE)] <- NA 	# Prepara para dropar correlaÃ§Ãµes duplicadas
+	tab_cor <- as.data.frame(as.table(tab_cor))  	# Transforma em uma tabela de trÃªs colunas
 	tab_cor <- na.omit(tab_cor)  					# Elimina os valores missings
 	names(tab_cor) <- c("Y","X", "Cor")
-	tab_cor <- tab_cor[order(tab_cor$Y, -abs(tab_cor$Cor)),]  # Ordena pelas maiores correlações
+	tab_cor <- tab_cor[order(tab_cor$Y, -abs(tab_cor$Cor)),]  # Ordena pelas maiores correlaÃ§Ãµes
 	rownames(tab_cor) <- 1:nrow(tab_cor)	
-	## Estimar e anexar o R-Quadrado à relação
+	## Estimar e anexar o R-Quadrado Ã  relaÃ§Ã£o
 	r2 <- nm <- c()
 	for (i in 1:nrow(tab_cor)) {
 		formu <- as.formula(paste(as.character(unlist(tab_cor[i,1:2])), collapse="~"))
@@ -965,14 +965,14 @@ options(digits = dig)
 identico <- function(x, interp=FALSE) {
 
 	if (interp) {
-	#Caso haja valores missing: Interpolação linear!
+	#Caso haja valores missing: InterpolaÃ§Ã£o linear!
 		if (any(is.na(x))) {
 		
-			# Média nos extremos
+			# MÃ©dia nos extremos
 			if (is.na(x[1])) x[1] <- mean(x, na.rm=TRUE)
 			if (is.na(x[length(x)])) x[length(x)] <- mean(x, na.rm=TRUE)
 			
-			# Interpolação linear nos outros pontos.
+			# InterpolaÃ§Ã£o linear nos outros pontos.
 			x <- na.interp(x)
 		}
 	}
@@ -981,34 +981,33 @@ identico <- function(x, interp=FALSE) {
 	ndup <- length(x[duplicated(x)])
 	sdto <- sd(x)
 	
-	## Remover métricas com mais de 90% repetidos ou com desvio padrão muito baixo!
+	## Remover mÃ©tricas com mais de 90% repetidos ou com desvio padrÃ£o muito baixo!
 	ifelse (ndup/ntot > 0.90 | sd(x) < 0.00001 | is.logical(x), 1, 0) 
 	# 0 = OK, 1 = Deleta
 }
 
-ordem_diferencas <-
-function(x, alpha = 0.05, plot = TRUE, ...) {
-#if (class(x) == "numeric") {
-#	cat("Serie numerica, convertendo em 'ts' com frequency = 2!\n")
-#	x <- ts(x, frequency = 2, )}
-	ns <- nsdiffs(x)
-	if(ns > 0) {
-	  xstar <- diff(x, lag=frequency(x), differences=ns)
-	} else {
-	  xstar <- x
-	}
-	nd <- ndiffs(xstar, alpha=alpha)
-	if(nd > 0) {
-	  xstar <- diff(xstar,differences=nd)
-	}
-	if (plot & nd > 0){
-		par(mfrow=c(2,1))
-		plot(x, col=2, ylab="Serie antes", xlab="Tempo", main="")
-		plot(xstar, col=3, ylab="Serie depois", xlab="Tempo", main="")
-		par(mfrow=c(1,1))
-	}
-	return(list(antes = x, depois = xstar, ndifs = nd))
-}
+ordem_diferencas <-  function(x, alpha = 0.05, plot = TRUE, ...) {
+    if (class(x) == "numeric") {
+    	cat("Serie numerica, convertendo em ts com frequency = 2\n")
+    	x <- ts(x, frequency = 2)}
+    ns <- nsdiffs(x)
+    if(ns > 0) {
+      xstar <- diff(x, lag=frequency(x), differences=ns)
+    } else {
+      xstar <- x
+    }
+    nd <- ndiffs(xstar, alpha=alpha)
+    if(nd > 0) {
+      xstar <- diff(xstar,differences=nd)
+    }
+    if (plot & nd > 0){
+      par(mfrow=c(2,1))
+      plot(x, col=2, ylab="Serie antes", xlab="Tempo", main="")
+      plot(xstar, col=3, ylab="Serie depois", xlab="Tempo", main="")
+      par(mfrow=c(1,1))
+    }
+    return(list(antes = x, depois = xstar, ndifs = nd))
+  }
 
 ## Calcula estatisticas descritivas de um vetor, tabela ou matriz de dados
 Desc <- function(dados, nivel=0.95, tipoci = "basic", nsimu = 500, dig=2) {
@@ -1031,7 +1030,7 @@ Desc <- function(dados, nivel=0.95, tipoci = "basic", nsimu = 500, dig=2) {
     
 	out <- as.data.frame(t(round(c(Mediana = mediana, DesvP = desviop, "Media+DesvP" = meddesv, Nulos = na + null, Min = minimo, Max = maximo, CV = cv), dig)))
 
-	# Funcao para intervalode confiança da média
+	# Funcao para intervalode confianÃ§a da mÃ©dia
     cimean<- function(x, i, ...) {
 		m <- mean(x[i])
 		n <- length(i)
@@ -1090,7 +1089,7 @@ aggreg <- function(daxts, FUN, freq = "daily", dig = 4, ...) {
 }
 
 ###################################################
-## Funções do pacote lmtest
+## FunÃ§Ãµes do pacote lmtest
 ###################################################
 
 ## Teste de Breusch-Pagan
@@ -1250,7 +1249,7 @@ dwtest <- function (formula, order.by = NULL, alternative = c("greater",
 }
 
 ###################################################
-## Funcões do pacote TSA
+## FuncÃµes do pacote TSA
 ###################################################
 
 ## Teste de Portmanteau Tests for Fitted ARIMA
@@ -1300,10 +1299,10 @@ LB.test <- function (model, lag = 12, type = c("Ljung-Box", "Box-Pierce"),
 }
 
 ###################################################
-## Funções do pacote tseries
+## FunÃ§Ãµes do pacote tseries
 ###################################################
 
-## Teste de Jarque–Bera
+## Teste de JarqueÂ–Bera
 jarque.bera.test <- function (x) 
 {
     if (NCOL(x) > 1) 
