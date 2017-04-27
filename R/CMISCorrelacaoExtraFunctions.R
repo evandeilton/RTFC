@@ -270,7 +270,7 @@ my_glm_vif <- function(dados, vresposta, explicativas, nvif=50, regsimples=FALSE
 			nvif <- nvif
 		}
 	} else {
-		modelocompleto <- "Nao foi possivel fazer a regress?o inicial!"
+		modelocompleto <- "Nao foi possivel fazer a regressao inicial!"
 	}
 
 	# Remove as vari?veis com VIF maiores que um valor dado
