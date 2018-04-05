@@ -1,8 +1,8 @@
 # O pacote RTFC
 RTFC é a sigla para R Trend, Forecast and Correlation. A ideia base deste pacote é fazer uma abordagem
-estatística baseada em forecast de séries tempoarais para um CMIS (Common management Information Service).
-Em outras palabras busca-se criar um módulo de forecast automatizado que pode ser integrado a um CMIS
-genérico para trabalhar forncendo previsões para deterninadas métricas ou séries temporais
+estatística baseada em forecast de séries temporais para um CMIS (Common management Information Service).
+Em outras palavras busca-se criar um módulo de forecast automatizado que pode ser integrado a um CMIS
+genérico para trabalhar fornecendo previsões para determinadas métricas ou séries temporais
 
 # Descrição
 Faz análise Regressão/Correlação entre métricas explicativas e explicadas automaticamente pelo método 
@@ -16,7 +16,7 @@ a parte do _cmis_forecast_ que envolve tratamento de outliers, missing, métrica
 dentre outras. Em relação à modelagem, conceitos como redução de variáveis via ANOVA tipo II, análise 
 de CrossValidation e redução pela metodologia LASSO são empregadas em busca da melhor combinação de 
 técnicas para ajustes de modelos de forma mais inteligente evitando regressões espúrias e modelos 
-estatísticamente fracos. Em termos de decisão, entram em cena as estatísticas F, coeficiante de 
+estatisticamente fracos. Em termos de decisão, entram em cena as estatísticas F, coeficiente de 
 determinação, estatística PRESS, ranking de resíduos e análise de AIC.
 
 Os modelos abordados na análise de regressão estão divididos em duas classes: Modelos de Regressão
@@ -25,16 +25,16 @@ Linear Simples (MRLS) e Modelos de Regressão Linear Múltiplos (MRLM).
 Quando o argumento de regressão simples é verdadeiro, todas as possibilidades de modelos de regressão
 simples para os dados são testadas e não há redução de variáveis, neste caso os modelos são checados 
 por reamostragens internas via CrossValidation. Se os modelos são bons segundo a qualidade de seus 
-resíduos e do coeficiente de determinação, passa-se para a etapa de análise dos coeficientes estiamdos
-via estatístcia Wald. No caso de modelos múltiplos uma verificação prévia é feita nas covariáveis em
+resíduos e do coeficiente de determinação, passa-se para a etapa de análise dos coeficientes estimados
+via estatística Wald. No caso de modelos múltiplos uma verificação prévia é feita nas covariáveis em
 busca de problemas de multicolinearidade que podem levar a modelos mal estimados e/ou regressões espúrias.
 Se alguma métrica apresentar problemas de multicolinearidade ela é então removida do modelo e o mesmo
-é reestimado e passa pela CrossValidation para um filtro mais sofisticado.
+é ré estimado e passa pela CrossValidation para um filtro mais sofisticado.
 
 Em virtude de anomalias nos dados, os chamados pontos discrepantes e também valores faltantes (missing values),
-em muitas análises tais casos são tratados como exeção e, em muitas situações, técnicas adequadas de 
+em muitas análises tais casos são tratados como exceção e, em muitas situações, técnicas adequadas de 
 tratamento devem ser utilizadas visando contornar sem deturpar o comportamento real dos dados. 
-Diversas técnicas de detecção de outliers são utilizadas na literatuta atual, contudo esta questão é delicada
+Diversas técnicas de detecção de outliers são utilizadas na literatura atual, contudo esta questão é delicada
 em função do tipo de dado envolvido e de fatores inesperados como catástrofes, por exemplo. A abordagem 
 de tratamento de outliers no CMIS é feita em duas frentes que suporta dois tipos de situações 
 suportadas pela abordagem de Hyndman.
@@ -44,8 +44,8 @@ um modelo linear é ajustado com base no histórico e valões estimados deste mo
 para completar a série;
 
 II.	Dados sazonais com ou sem missing: é feita uma decomposição da série via stl(Seazonal Trend Loess),
-que usa regressão polinomial na série dessazonalizada e em seguida resazonalisa a mesma com base na projeção 
-desta no perído anterior. Embora complicada, esta técnica permite capturar comportamentos sazonais e evita 
+que usa regressão polinomial na série dessazonalizada e em seguida ré sazonaliza a mesma com base na projeção 
+desta no período anterior. Embora complicada, esta técnica permite capturar comportamentos sazonais e evita 
 a perda de informação da série real.
 
 # Alerta! Este pacote é experimental e não está livre de erros.
@@ -69,7 +69,7 @@ Conjunto de dados com a primeira sendo a DATA no formato DD/MM/AAAA HH:MM:SS e o
 mínimo duas covariáveis.
 
 * ***n_passos_frente :***
-Número que indica o orizonte de projeção.
+Número que indica o horizonte de projeção.
 Métrica mensal, a projeção máxima é de 18 meses (3 anos);
 Métrica diária, a projeção máxima é de 180 dias (6 meses)
 Métrica é por hora, a projeção máxima é de 336 dias (14 dias).
@@ -88,14 +88,14 @@ Representa o número de reamostragens a ser realizada para cada modelo a fim de 
 do mesmo. Padrão é 5 reamostragens.
 
 * ***nmod :***
-Em modelos de regressão múltipa indica o total de modelos a serem retornados por métrica. Padrão é 5.
+Em modelos de regressão múltipla indica o total de modelos a serem retornados por métrica. Padrão é 5.
 
 * ***r2 :***
-É o threshold padrão para o coeficiente de deterninação. 0.5 é o mínimo padrão. Quanto maior melhor.
+É o threshold padrão para o coeficiente de determinação. 0.5 é o mínimo padrão. Quanto maior melhor.
 
 * ***residteste :***
 Threshold para decisão de escolha baseada na qualidade da análise de resíduos. Seis testes são aplicados
-e um indice de 1 a 10 é definido. Tomando-se o inverso deste número, quanto mais próximo de 0,10 melhor. 
+e um índice de 1 a 10 é definido. Tomando-se o inverso deste número, quanto mais próximo de 0,10 melhor. 
 
 * ***sig :***
 Alpha de significância para escolha dos betas estimados nas regressões via teste estatístico de Wald. O padrão é 0,10. 
